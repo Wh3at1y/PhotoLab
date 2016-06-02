@@ -1,11 +1,6 @@
 package pixLab.classes;
 import java.awt.*;
-import java.awt.font.*;
-import java.awt.geom.*;
 import java.awt.image.BufferedImage;
-import java.text.*;
-import java.util.*;
-import java.util.List; // resolves problem with java.awt.List and java.util.List
 
 /**
  * A class that represents a picture.  This class inherits from 
@@ -98,8 +93,8 @@ public class Picture extends SimplePicture
       }
     }
   }
-  
-  public void zeroRed()
+  //Brings the reds to crazy
+  public void brightRed()
   {
 	  Pixel[][] redPixels = this.getPixels2D();
 	  for(int row = 0; row < redPixels.length; row++)
@@ -107,14 +102,29 @@ public class Picture extends SimplePicture
 			  for(int col = 0; col < redPixels[0].length; col++)
 				  {
 					  Pixel currentPixel = redPixels[row][col];
-					  currentPixel.setRed(0);
+					  currentPixel.setRed(100);
 					  
-					  redPixels[row][col].setRed(0);
+					  redPixels[row][col].setRed(100);
 				  }
 		  }
   }
   
-  public void zeroGreen()
+  public void brightBlue()
+  {
+	  Pixel[][] whitePixels = this.getPixels2D();
+	  for(int row = 0; row < whitePixels.length; row++)
+		  {
+			  for(int col = 0; col < whitePixels[0].length; col++)
+				  {
+					  Pixel currentPixel = whitePixels[row][col];
+					  currentPixel.setBlue(20);
+					  
+					  whitePixels[row][col].setBlue(20);
+				  }
+		  }
+  }
+  
+  public void brightGreen()
 	  {
 		  Pixel[][] greenPixels = this.getPixels2D();
 		  for(int row = 0; row < greenPixels.length; row++)
@@ -122,13 +132,46 @@ public class Picture extends SimplePicture
 				  for(int col = 0; col < greenPixels[0].length; col++)
 					  {
 						  Pixel currentPixel = greenPixels[row][col];
-						  currentPixel.setGreen(0);
+						  currentPixel.setBlue(10);
 						  
-						  greenPixels[row][col].setRed(0);
+						  greenPixels[row][col].setRed(10);
 					  }
 			  }
 	  }
   
+  public void mirrorVerticalRightToLef()
+  {
+	  Pixel[][] pixels= this.getPixels2D();
+	  Pixel leftPixel = null;
+	  Pixel rightPixel = null;
+	  int width = pixels[0].length;
+	  
+	  for(int row = 0; row < pixels.length; row++)
+		  {
+			  for(int col = pixels[0].length; col > width / 2; col--)
+				  {
+					  rightPixel = pixels[row][col];
+					  leftPixel = pixels[row][width - 1 - col];
+					  leftPixel.setColor(rightPixel.getColor());
+				  }
+		  }
+  }
+  
+  public void randomColor()
+  {
+	  Pixel[][] pixels = this.getPixels2D();
+	  for(Pixel[] row : pixels)
+		  {
+			  for(Pixel current : row)
+				  {
+					  int randomRed = (int) (Math.random() * 256);
+					  int randomGreen = (int) (Math.random() * 256);
+					  int randomBlue = (int) (Math.random() * 256);
+					  
+					  current.setRed(randomRed); current.setGreen(randomGreen); current.setBlue(randomBlue);
+				  }
+		  }
+  }
   
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
@@ -156,7 +199,6 @@ public class Picture extends SimplePicture
     int mirrorPoint = 276;
     Pixel leftPixel = null;
     Pixel rightPixel = null;
-    int count = 0;
     Pixel[][] pixels = this.getPixels2D();
     
     // loop through the rows
@@ -208,7 +250,7 @@ public class Picture extends SimplePicture
   /** Method to create a collage of several pictures */
   public void createCollage()
   {
-    Picture flower1 = new Picture("flower1.jpg");
+    Picture flower1 = new Picture("singapore.jpg");
     Picture flower2 = new Picture("flower2.jpg");
     this.copy(flower1,0,0);
     this.copy(flower2,100,0);
@@ -255,10 +297,8 @@ public class Picture extends SimplePicture
    */
   public static void main(String[] args) 
   {
-    Picture beach = new Picture("beach.jpg");
+    Picture beach = new Picture("sin	gapore.jpg");
     beach.explore();
-    beach.zeroGreen();
-    beach.zeroRed();
     beach.zeroBlue();
     beach.explore();
   }

@@ -1,6 +1,5 @@
 package pixLab.classes;
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Class that holds a digital picture and displays it using a JFrame

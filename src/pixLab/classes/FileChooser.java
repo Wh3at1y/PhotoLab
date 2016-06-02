@@ -2,7 +2,6 @@ package pixLab.classes;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import java.util.Properties;
 import java.io.*;
 import java.net.*;
 
@@ -28,8 +27,6 @@ public class FileChooser
 	{
 		String path = null;
 		String directory = getMediaDirectory();
-		boolean done = true;
-
 		// get the full path
 		path = directory + fileName;
 		return path;
@@ -110,7 +107,6 @@ public class FileChooser
 	public static String getMediaDirectory()
 	{
 		String directory = null;
-		boolean done = false;
 		File dirFile = null;
 
 		// try to find the images directory
@@ -135,7 +131,6 @@ public class FileChooser
 		}
 		catch (UnsupportedEncodingException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
